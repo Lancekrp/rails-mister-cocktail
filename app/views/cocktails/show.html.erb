@@ -1,4 +1,6 @@
 <h1>Here are the ingredients for <%= @cocktail.name %>:</h1>
 
 
+
 <%= link_to "return to main page", cocktails_path %>
+<%= link_to "Add ingredients", new_cocktail_dose_path(@cocktail.id) %>

@@ -9,13 +9,12 @@ require 'open-uri'
 require 'json'
 
 
-ingredients = JSON.parse(File.read(https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list))
-ingredients.each do |ingredient|
-	Ingredient.create(name: "ingredient")
+url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+uri = URI.parse(url)
+ingredients = uri.open.read
+json_ingredients = JSON.parse(ingredients)
+ingredients_data = json_ingredients["drinks"]
+ingredients_data.each do |drink|
+  ing = Ingredient.new(name: drink["strIngredient1"])
+  ing.save
 end
-
-Ingredient.create(name: "lemon")
-Ingredient.create(name: "ice")
-Ingredient.create(name: "mint leaves")
-
-Cocktail.create(name: "Martini")
